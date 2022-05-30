@@ -1,5 +1,6 @@
 import { useLoaderData, Link } from "@remix-run/react";
 import connectDb from "~/db/connectDb.server.js";
+import { json } from "@remix-run/node";
 
 export async function loader() {
   const db = await connectDb();
