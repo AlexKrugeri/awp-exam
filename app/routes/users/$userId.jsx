@@ -28,11 +28,11 @@ export default function UserPage() {
                 <p className="mb-0 mt-3 text-grey-dark text-base italic">
                   Subscriber since: {user?.createdAt.split("T")[0]}
                 </p>
-                <p className="text-lg font-bold mt-2">
+                <span className="text-lg font-bold mt-2">
                   {user?.tags.map((tag, key) => {
                     return <p key={key}>#{JSON.parse(tag)[key].value}</p>;
                   })}
-                </p>
+                </span>
               </div>
               <div className="w-full lg:w-3/5 lg:px-3">
                 <p className="text-md mt-4 lg:mt-0 text-justify font-normal md:text-left text-lg">
