@@ -6,12 +6,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import styles from "~/tailwind.css";
 import { AiFillHeart } from "@react-icons/all-files/ai/AiFillHeart";
 import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 import { ImUser } from "@react-icons/all-files/im/ImUser";
 import { HiLogout } from "@react-icons/all-files/hi/HiLogout";
+import { getSession } from "~/sessions.server.js";
+import { json } from "@remix-run/node";
 
 export const links = () => [
   {
@@ -19,6 +22,13 @@ export const links = () => [
     href: styles,
   },
 ];
+
+export async function loader({ request }) {
+  const session = await getSession(request.headers.get("Cookie"));
+  return json({
+    userId: session.get("userId"),
+  });
+}
 
 export function meta() {
   return {
@@ -29,6 +39,8 @@ export function meta() {
 }
 
 export default function App() {
+  const loaderData = useLoaderData();
+  console.log(loaderData);
   return (
     <html lang="en">
       <head>
@@ -82,13 +94,23 @@ export default function App() {
             </ul>
             <ul className="space-y-2">
               <li className="">
-                <Link
-                  to="/logout"
-                  className="flex items-center pl-6 p-2 text-base font-normal text-white rounded-lg hover:bg-custom-hoverBlue"
-                >
-                  <HiLogout className="w-6 h-6" />
-                  <span className="ml-3 text-xl ">Logout</span>
-                </Link>
+                {loaderData?.userId ? (
+                  <Link
+                    to="/logout"
+                    className="flex items-center pl-6 p-2 text-base font-normal text-white rounded-lg hover:bg-custom-hoverBlue"
+                  >
+                    <HiLogout className="w-6 h-6" />
+                    <span className="ml-3 text-xl ">Logout</span>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="flex items-center pl-6 p-2 text-base font-normal text-white rounded-lg hover:bg-custom-hoverBlue"
+                  >
+                    <HiLogout className="w-6 h-6 rotate-180" />
+                    <span className="ml-3 text-xl ">Login</span>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
