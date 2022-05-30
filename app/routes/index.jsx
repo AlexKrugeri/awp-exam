@@ -19,7 +19,7 @@ export default function Index() {
           return (
             <div
               key={user._id}
-              className="rounded overflow-hidden hover:bg-gray-100 hover:shadow-gray-400 cursor-pointer shadow-lg"
+              className="rounded-xl overflow-hidden hover:bg-gray-100 hover:shadow-gray-400 cursor-pointer shadow-lg"
             >
               <div className="px-6 py-4">
                 <span

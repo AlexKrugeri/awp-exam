@@ -41,15 +41,23 @@ export async function loader({ request }) {
 export default function ProfilePage() {
   const user = useLoaderData();
   return (
-    <div>
+    <div className="mt-10 ml-5 max-w-2xl">
       <Avatar seedProp={user?.avatarImage} />
       <h1 className="text-2xl font-bold mb-4">{user?.name}</h1>
-      <h2>{user?.role}</h2>
+      <h2 className="text-lg font-semibold mb-4">Role: {user?.role}</h2>
       <ul className="mb-5">
-        <li className="lg:my-3">{user?.bio}</li>
-        <li>{user?.createdAt.split("T")[0]}</li>
+        <p className="text-md mt-4 lg:mt-0 text-justify font-normal md:text-left text-lg">
+          {user?.bio}
+        </p>
+        <li className="mt-10">
+          Account created on: {user?.createdAt.split("T")[0]}
+        </li>
         {user?.tags.map((tag, key) => {
-          return <li key={key}>{JSON.parse(tag)[key].value}</li>;
+          return (
+            <li className="text-lg font-bold mt-2" key={key}>
+              {JSON.parse(tag)[key].value}
+            </li>
+          );
         })}
       </ul>
       <Link
