@@ -46,7 +46,7 @@ export default function ProfilePage() {
       <h1 className="text-2xl font-bold mb-4">{user?.name}</h1>
       <h2 className="text-lg font-semibold mb-4">Role: {user?.role}</h2>
       <ul className="mb-5">
-        <p className="text-md mt-4 lg:mt-0 text-justify font-normal md:text-left text-lg">
+        <p className="text-md mt-5 lg:mt-0 text-justify font-normal md:text-left text-lg">
           {user?.bio}
         </p>
         <li className="mt-10">
